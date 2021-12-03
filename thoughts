@@ -1,9 +1,0 @@
-# FDIL's thoughts
-
-Currently am thinking of the matrix class being similar to <vectors> or <strings> in C++, in the sense how they allocate an array of pointers in heap, 
-each pointer in that array points to an array in heap.
-
-Another idea I had was instead of arrays with all the numbers, I have a linked list. This helps with potentialy memory issues of lacking heap for very large matrixes.
-However issue is the speed of accessing each element.
-
-For now will point to arrays as for the most part, I believe the memory issues of lacking consecutive bytes in heap shouldn't be an issue as I don't see much use case for 1000 doubles for example.
