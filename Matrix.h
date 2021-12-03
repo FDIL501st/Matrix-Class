@@ -15,15 +15,21 @@ public:
 
     //Constructor that provides dimensions of array
     Matrix(int r, int c); 
+
     //Because dealing with memory in heap, 
     //will need a destructor, 
     //copy constructor and 
     //assignment operator overload
-
+    
+    //Destroyer
+    ~Matrix();
 private:
     double** data;  //Pointer in stack to point to array of pointers in heap
-    int rows;   // # of rows in matrix
-    int columns;    // # of columns in matrix
+    int rows;   // # of rows in matrix = # of pointers in array
+    int columns;    // # of columns in matrix = # of doubles in array that pointers to point
+
+    //A helper method to free all memory in heap 
+    void destroy(); 
 };
 
 }
