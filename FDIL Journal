@@ -1,4 +1,4 @@
-# FDIL's thoughts
+#FDIL's thoughts
 
 Currently am thinking of the matrix class being similar to <vectors> or <strings> in C++, in the sense how they allocate an array of pointers in heap, 
 each pointer in that array points to an array in heap.
