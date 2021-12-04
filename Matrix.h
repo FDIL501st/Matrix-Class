@@ -1,4 +1,8 @@
-namespace mtx {
+#ifndef MTX_MATRIX.H
+#define MTX_MATRIX.H
+
+namespace mtx 
+{
 
 class Matrix {
 public:
@@ -32,5 +36,5 @@ private:
 
 }
 
-
+#endif
 
