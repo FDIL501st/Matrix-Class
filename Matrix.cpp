@@ -11,23 +11,28 @@ Matrix::Matrix() : rows(0), columns(0) {
     //This means that no memory allocated in heap right now
 }
 
-Matrix::Matrix(int r, int c) : rows(c), columns(c) {
+Matrix::Matrix(int r, int c) : rows(r), columns(c) {
     data = new double* [r];
-
+    if (data == 0)
+    {
+        cout << "Heap was not granted, data points to null." << endl;
+        return;
+    }
     for (int i = 0; i < rows; i++)
     {
         data[i] = new double[c];
-
-        for (int j = 0; j < columns; j++)
-            data[i][j] = 0.0;
+        if (data[i] == 0)
+        {
+            cout << "Heap was not granted, row " << i << " points to null." << endl;
+            return;
+        }
     }
-
+        
     //Initialized with r # of rows and c # of columns,
     // data pointing to an array of r double*  in heap,
     // each double* points to an array of c doubles also in heap
-    //All the doubles are initialzed to 0.0
-
-    //Essentially, made a r x c matrix where all the data is 0
+    
+    //Essentially just made a r x c matrix stored in heap
 }
 
 Matrix::~Matrix()
@@ -48,4 +53,25 @@ void Matrix::destroy()
     //Now free data
     delete [] data;
     data = 0;
+}
+
+double* Matrix::at(int i, int j)
+{
+    return &(data[i][j]);
+    //No out of bounds check yet
+}
+
+void Matrix::print() const
+{   
+    // i indexes row
+    for (int i = 0; i < rows; i++)
+    {
+        // j indexes column
+        for (int j = 0; j < columns; j++)
+            cout << '\t' << data[i][j];
+        
+        cout << endl;
+    }
+    //Result is printing each row in a seperate line, each number seperated by a tab
+    
 }

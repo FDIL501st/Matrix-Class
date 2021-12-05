@@ -1,5 +1,9 @@
-#ifndef MTX_MATRIX.H
-#define MTX_MATRIX.H
+#ifndef MTX_MATRIX_H
+#define MTX_MATRIX_H
+
+#include <iostream>
+using std::cout;
+using std::endl;
 
 namespace mtx 
 {
@@ -25,6 +29,15 @@ public:
     
     //Destroyer
     ~Matrix();
+
+    //Returns a pointer to the double at i,j
+    //Allows to change the value of the double
+    double* at(int i, int j);
+
+
+    //A print function for the class to print the matrix
+    void print() const;
+
 private:
     double** data;  //Pointer in stack to point to array of pointers in heap
     int rows;   // # of rows in matrix = # of pointers in array
