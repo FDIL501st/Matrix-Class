@@ -12,9 +12,10 @@ class Matrix {
 public:
     //This class only works with doubles
     //This essentially means most numbers, just not too large nor complex numbers
-
+    //Also the class is limited to 2D arrays
+    
     //First need to figure out constructors of the class
-    //Constructors will only allocate memory in heap and initlialize all values to 0
+    //Constructors will only allocate memory in heap
     
     //Default constructor, allocates a pointer pointing to null in heap
     Matrix();   
