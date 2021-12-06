@@ -43,7 +43,20 @@ int main(int argc, char** argv)
     Matrix m2(m);
     num = m2.at(0,0);
     *num = 14.6;
+    cout << endl;
     m2.print();
+#endif
+
+#if 1
+    Matrix m3 = m2;
+    num = m3.at(1,0);
+    *num = -2.2;
+    cout << endl;
+    m.print();
+    cout << endl;
+    m2.print();
+    cout << endl;
+    m3.print();
 #endif
     return 1;
 }

@@ -45,6 +45,17 @@ Matrix::Matrix(const Matrix& source)
     copy(source);
 }
 
+Matrix& Matrix::operator=(const Matrix& source)
+{
+    //First check we are not trying to assign itself
+    if (this != &source)
+    {
+        destroy();
+        copy(source);
+    }
+    return *this;
+}
+
 void Matrix::copy(const Matrix& source)
 {
     //First directly copy rows and columns

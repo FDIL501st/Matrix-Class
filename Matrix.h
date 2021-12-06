@@ -31,13 +31,15 @@ public:
     //Copy Constructor
     Matrix(const Matrix& source);
 
+    //Assignment operator overload
+    Matrix& operator= (const Matrix& rhs);
+    
     //Destroyer
     ~Matrix();
 
     //Returns a pointer to the double at i,j
     //Allows to change the value of the double
     double* at(int i, int j);
-
 
     //A print function for the class to print the matrix
     void print() const;
