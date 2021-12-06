@@ -1,4 +1,2 @@
-
-*.json
-.vs/Matrix-Class/v17/.suo
-*.sqlite
+.vs
+*.exe
