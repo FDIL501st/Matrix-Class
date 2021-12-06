@@ -17,7 +17,7 @@ public:
     //First need to figure out constructors of the class
     //Constructors will only allocate memory in heap
     
-    //Default constructor, allocates a pointer pointing to null in heap
+    //Default constructor, allocates a pointer pointing to null in heap. Makes size 0 array.
     Matrix();   
 
     //Constructor that provides dimensions of array
@@ -28,6 +28,9 @@ public:
     //copy constructor and 
     //assignment operator overload
     
+    //Copy Constructor
+    Matrix(const Matrix& source);
+
     //Destroyer
     ~Matrix();
 
@@ -46,6 +49,9 @@ private:
 
     //A helper method to free all memory in heap 
     void destroy(); 
+
+    //A helper method to deepcopy another Matrix object
+    void copy(const Matrix& source);
 };
 
 }

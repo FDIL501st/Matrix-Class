@@ -40,6 +40,52 @@ Matrix::~Matrix()
     destroy();
 }
 
+Matrix::Matrix(const Matrix& source)
+{
+    copy(source);
+}
+
+void Matrix::copy(const Matrix& source)
+{
+    //First directly copy rows and columns
+    rows = source.rows;
+    columns = source.columns;
+
+    //Now need to deepcopy the matrix, first need to make it
+    data = 0;
+
+    //Now need to check if the matrix we try to copy is empty
+    if (!source.data)
+        return;
+    
+    //Making it here means there is a matrix to actually copy
+    // So now we reserve the memory needed
+    data = new double* [rows];
+    if (data == 0)
+    {
+        cout << "Heap was not granted, data points to null." << endl;
+        return;
+    }
+
+    // i indexes each row
+    for (int i = 0; i < rows; i++)
+    {
+        data[i] = new double [columns];
+        if (data[i] == 0)
+        {
+            cout << "Heap was not granted, row " << i << " points to null." << endl;
+            return;
+        }
+        
+        //Having reserved the row, now need to fill it up
+        //  j indexes each column
+        for (int j = 0; j < columns; j++)
+        {
+            data[i][j] = source.data[i][j];
+        }
+    }
+}
+
 void Matrix::destroy() 
 {
     //First free each double* in array data points to

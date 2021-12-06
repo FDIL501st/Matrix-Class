@@ -13,7 +13,7 @@ int main(int argc, char** argv)
             << "Program will now end." << endl;
         return 0;
     }
-#if 0
+#if 1
     int r = argv[1][0] - '0';
     int c = argv[2][0] - '0';
     Matrix m(r,c);
@@ -38,5 +38,12 @@ int main(int argc, char** argv)
     // as it isn't accessing memory that it can't
 
     //Keyword is 'probably', no way to really tell that I'm not just getting lucky
+
+#if 1
+    Matrix m2(m);
+    num = m2.at(0,0);
+    *num = 14.6;
+    m2.print();
+#endif
     return 1;
 }
