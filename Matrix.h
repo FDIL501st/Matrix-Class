@@ -9,37 +9,30 @@ namespace mtx
 {
 
 class Matrix {
-public:
-    //This class only works with doubles
-    //This essentially means most numbers, just not too large nor complex numbers
-    //Also the class is limited to 2D arrays
-    
-    //First need to figure out constructors of the class
-    //Constructors will only allocate memory in heap
-    
+//This class only works with doubles
+//This essentially means most numbers, just not too large nor complex numbers
+//Also the class is limited to 2D arrays
+
+//Constructors will only allocate memory in heap
+public:    
     //Default constructor, allocates a pointer pointing to null in heap. Makes size 0 array.
     Matrix();   
 
     //Constructor that provides dimensions of array
     Matrix(int r, int c); 
-
-    //Because dealing with memory in heap, 
-    //will need a destructor, 
-    //copy constructor and 
-    //assignment operator overload
     
     //Copy Constructor
     Matrix(const Matrix& source);
 
     //Assignment operator overload
     Matrix& operator= (const Matrix& rhs);
-    
+
     //Destroyer
     ~Matrix();
 
     //Returns a pointer to the double at i,j
     //Allows to change the value of the double
-    double* at(int i, int j);
+    double& at(int i, int j);
 
     //A print function for the class to print the matrix
     void print() const;

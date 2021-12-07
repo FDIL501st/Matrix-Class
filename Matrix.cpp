@@ -112,9 +112,9 @@ void Matrix::destroy()
     data = 0;
 }
 
-double* Matrix::at(int i, int j)
+double& Matrix::at(int i, int j)
 {
-    return &(data[i][j]);
+    return data[i][j];
     //No out of bounds check yet
 }
 

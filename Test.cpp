@@ -16,12 +16,10 @@ int main(int argc, char** argv)
 #if 1
     int r = argv[1][0] - '0';
     int c = argv[2][0] - '0';
-    Matrix m(r,c);
-    double* num = m.at(0,0);
-    *num = 5.46;
-    num = m.at(1,2);
-    *num = -4.67;
-    m.print();
+    Matrix m1(r,c);
+    m1.at(0,0) = 5.46;
+    m1.at(1,2) = -4.67;
+    m1.print();
     //Test has shown that the contructor works and the print function works.
     //Also shows that the at() properly returns a reference to an entry 
     //  and can change that entry
@@ -40,19 +38,17 @@ int main(int argc, char** argv)
     //Keyword is 'probably', no way to really tell that I'm not just getting lucky
 
 #if 1
-    Matrix m2(m);
-    num = m2.at(0,0);
-    *num = 14.6;
+    Matrix m2(m1);
+    m2.at(0,0) = 14.6;
     cout << endl;
     m2.print();
 #endif
 
 #if 1
     Matrix m3 = m2;
-    num = m3.at(1,0);
-    *num = -2.2;
+    m3.at(1,0) = -2.2;
     cout << endl;
-    m.print();
+    m1.print();
     cout << endl;
     m2.print();
     cout << endl;
