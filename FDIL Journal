@@ -7,3 +7,18 @@ Another idea I had was instead of arrays with all the numbers, I have a linked l
 However issue is the speed of accessing each element.
 
 For now will point to arrays as for the most part, I believe the memory issues of lacking consecutive bytes in heap shouldn't be an issue as I don't see much use case for 1000 doubles for example.
+
+Current Behaviour of Matrix:
+- Uniform 2D arrays of doubles
+- provide ability to have access to each element and edit the doubles
+- provide ability to get access to a row, but not make the pointer to that row change what it points to
+    - Might add ability to switch rows and columns (will have to be a class method)
+
+Potential Ideas:
+- Resize features similar to <vectors> or <string>, meaning that have a rule for allocating extra memory from heap to allow for ease of operation when resizing
+    - This also means have an option to see size of array(memory requested) and capacity(total memory allocated)
+
+- Have 2 different types of each operation
+    - one for Matrix to Matrix
+    - other for Matrix to constant (or vice versa if I can figure out how to also overload reverse operations)
+
