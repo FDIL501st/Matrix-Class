@@ -12,7 +12,7 @@ class Matrix {
 //This class only works with doubles
 //This essentially means most numbers, just not too large nor complex numbers
 //Also the class is limited to 2D arrays
-
+//The 2D arrays are assumed to be uniform for the print function
 //Constructors will only allocate memory in heap
 public:    
     //Default constructor, allocates a pointer pointing to null in heap. Makes size 0 array.
@@ -30,9 +30,22 @@ public:
     //Destroyer
     ~Matrix();
 
-    //Returns a pointer to the double at i,j
-    //Allows to change the value of the double
+
+    //Returns the reference to the double at i,j.
+    //Allows to change the value of the double.
     double& at(int i, int j);
+
+    //Returns the double* at i.
+    //Allows to change the value of the double*.
+    //However, the double* returned can't have its referenced changed,
+    // meaning that it can't be made to point to something else.
+    // A check to ensure people don't try to make non-uniorm arrays.
+    double* const at(int i);
+
+    //This design desicion limits people trying to change an entire row
+    //Will require a seperate function to do so, that checks for uniformity
+    
+    //Alternative to at(), lets people access using [] operator
 
     //A print function for the class to print the matrix
     void print() const;

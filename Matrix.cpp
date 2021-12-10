@@ -118,6 +118,12 @@ double& Matrix::at(int i, int j)
     //No out of bounds check yet
 }
 
+double* const Matrix::at(int i)
+{
+    return data[i];
+    //No out of bounds check yet
+}
+
 void Matrix::print() const
 {   
     // i indexes row

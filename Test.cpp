@@ -43,7 +43,12 @@ int main(int argc, char** argv)
     cout << endl;
     m2.print();
 #endif
-
+#if 1
+    *(m2.at(0)+1) = 3;
+    //m2.at(1) = m2.at(0);
+    //Test shown that was able to get a double* returned
+    //Also shows that m2.at(1) can't be modified, however the dereferenced value can.
+#endif
 #if 1
     Matrix m3 = m2;
     m3.at(1,0) = -2.2;
@@ -53,6 +58,9 @@ int main(int argc, char** argv)
     m2.print();
     cout << endl;
     m3.print();
+
+    //Test has shown that the = operator works fine for deepcopy of matrix objects.
+    //Also that each matrix object is a seperate object
 #endif
     return 1;
 }
