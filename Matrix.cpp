@@ -12,22 +12,41 @@ Matrix::Matrix() : rows(0), columns(0) {
 }
 
 Matrix::Matrix(int r, int c) : rows(r), columns(c) {
-    data = new double* [r];
-    if (data == 0)
+    try 
     {
-        cout << "Heap was not granted, data points to null." << endl;
-        return;
+        data = new double* [r];
     }
+    catch (const bad_alloc& e)
+    {
+        cerr << e.what() << ": Unable to allocate rows in heap." << endl;
+        rows = 0;
+        //Make rows to 0 as unable to allocate the memory
+    }
+
     for (int i = 0; i < rows; i++)
     {
-        data[i] = new double[c];
-        if (data[i] == 0)
+        try
         {
-            cout << "Heap was not granted, row " << i << " points to null." << endl;
-            return;
+            data[i] = new double[c];
+        }
+        catch(const bad_alloc& e)
+        {
+            cerr << e.what() << ": Unable to allocate row " << i <<" in heap." << endl;
+            columns = 0;
+            //Make columns to 0 as unable to allocate all the columns
+
+            for (int i = 0; i < rows; i++)
+            {
+                delete[] data[i];
+                data[i] = 0;
+            }
+            break;
+            //Then free allocation of each row and make each row have 0 column
+            //This is to ensure uniformity of the matrix if at any point a row was unable to be allocated in heap
         }
     }
-        
+    //if allocation failed, won't terminate, just will send the message the exception occured
+
     //Initialized with r # of rows and c # of columns,
     // data pointing to an array of r double*  in heap,
     // each double* points to an array of c doubles also in heap
@@ -62,19 +81,21 @@ void Matrix::copy(const Matrix& source)
     rows = source.rows;
     columns = source.columns;
 
-    //Now need to deepcopy the matrix, first need to make it
-    data = 0;
-
     //Now need to check if the matrix we try to copy is empty
     if (!source.data)
+    {
+        data = 0;
         return;
+    }
     
     //Making it here means there is a matrix to actually copy
     // So now we reserve the memory needed
     data = new double* [rows];
     if (data == 0)
     {
-        cout << "Heap was not granted, data points to null." << endl;
+        cerr << "Heap was not granted, data points to null." << endl;
+        rows = 0;
+        columns = 0;
         return;
     }
 
@@ -84,7 +105,14 @@ void Matrix::copy(const Matrix& source)
         data[i] = new double [columns];
         if (data[i] == 0)
         {
-            cout << "Heap was not granted, row " << i << " points to null." << endl;
+            cerr << "Heap was not granted, row " << i << " points to null." << endl;
+            columns = 0;
+            for (int i = 0; i < rows; i++)
+            {
+                delete[] data[i];
+                data[i] = 0;
+            }
+            //Loop above to ensure informity of matrix in case a row fails to get memory
             return;
         }
         
@@ -112,16 +140,78 @@ void Matrix::destroy()
     data = 0;
 }
 
+void Matrix::check_boundry_rows(int i)
+{
+    
+    //if i indexes before first row of matrix
+    if (i < 0)
+    {
+        string error_msg("Attempted to access row ");
+        error_msg += to_string(i) + ".\n";
+        error_msg += "Index can't be less than 0.\n";
+
+        throw out_of_range(error_msg);
+    }
+
+    //if i indexes past last row of matrix
+    
+    if (i >= rows)
+    {
+        string error_msg("Attempted to access row ");
+        error_msg += to_string(i) + ".\n";
+        error_msg += "Number of rows in matrix is ";
+        error_msg += to_string(rows) + ".\n";
+        error_msg += "Row index must be less than number of rows in matrix(i<";
+        error_msg += to_string(rows) + ").\n";
+
+        throw out_of_range(error_msg);
+    }
+
+    //Reaching here means 0<= i < rows, 
+}
+
+void Matrix::check_boundry_columns(int j)
+{
+    
+    //if i indexes before first row of matrix
+    if (j < 0)
+    {
+        string error_msg("Attempted to access column ");
+        error_msg += to_string(j) + ".\n";
+        error_msg += "Index can't be less than 0.\n";
+
+        throw out_of_range(error_msg);
+    }
+
+    //if j indexes past last row of matrix
+    
+    else if (j >= columns)
+    {
+        string error_msg("Attempted to access column ");
+        error_msg += to_string(j) + ".\n";
+        error_msg += "Number of column in matrix is ";
+        error_msg += to_string(columns) + ".\n";
+        error_msg += "Column index must be less than number of columns in matrix(j<";
+        error_msg += to_string(columns) + ").\n";
+
+        throw out_of_range(error_msg);
+    }
+
+    //Reaching here means 0<= j < columns, 
+}
+
 double& Matrix::at(int i, int j)
 {
+    check_boundry_rows(i);
+    check_boundry_columns(j);
     return data[i][j];
-    //No out of bounds check yet
+    
 }
 
 double* const Matrix::at(int i)
 {
+    check_boundry_rows(i);
     return data[i];
-    //No out of bounds check yet
 }
 
 void Matrix::print() const
@@ -136,5 +226,4 @@ void Matrix::print() const
         cout << endl;
     }
     //Result is printing each row in a seperate line, each number seperated by a tab
-    
 }
