@@ -2,18 +2,8 @@
 #define MTX_MATRIX_H
 
 #include <iostream>
-#include <stdexcept>
-#include <string>
 using std::cout;
-using std::cerr;
 using std::endl;
-
-using std::out_of_range;
-using std::bad_alloc;
-using std::bad_array_new_length;
-
-using std::string;
-using std::to_string;
 
 namespace mtx 
 {
@@ -30,15 +20,7 @@ public:
 
     //Constructor that provides dimensions of array
     Matrix(int r, int c); 
-    /*PROMISES:
-    Allocates memory in heap for rxc matrix 
-        an array of r double*
-        each double* points to an array of c doubles
-    If unable to allocate memory, will catch the bad_alloc exception and set rows or columns to 0
-        Depends on which array allocation caught the array, won't set both to 0 unless both throws the exception
-
-    */
-
+    
     //Copy Constructor
     Matrix(const Matrix& source);
 
@@ -54,11 +36,12 @@ public:
     double& at(int i, int j);
 
     //Returns the double* at i.
-    //Allows to change the value of the double the pointer points at.
-    //However, the double* returned can't have its referenced changed.
-    double* const at(int i);
+    //Allows to change the value of the double*.
+    //However, the double* returned can't have its referenced changed,
     // meaning that it can't be made to point to something else.
     // A check to ensure people don't try to make non-uniorm arrays.
+    double* const at(int i);
+
     //This design desicion limits people trying to change an entire row
     //Will require a seperate function to do so, that checks for uniformity
     
@@ -77,14 +60,6 @@ private:
 
     //A helper method to deepcopy another Matrix object
     void copy(const Matrix& source);
-
-    //A method that throws an out_of_range exception if index is not within bounds of rows.
-    //Does check if i is actually out of bounds or not.
-    void check_boundry_rows(int i);
-
-    //A method that throws an out_of_range exception if index is not within bounds of columns.
-    //Does check if j is out of bounds or not.
-    void check_boundry_columns(int j);
 };
 
 }
