@@ -62,6 +62,9 @@ Matrix::~Matrix()
 Matrix::Matrix(const Matrix& source)
 {
     copy(source);
+
+    //No need to check if this and source are the same as this is a constructor,
+    // no possible way to copy itself when this constructor is called
 }
 
 Matrix& Matrix::operator=(const Matrix& source)

@@ -2,3 +2,5 @@
 *.exe
 .vscode
 *.stackdump
+.Sameple-Test1
+.UnitTest1

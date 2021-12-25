@@ -1,7 +1,7 @@
 //File to test methods of Matrix class
 //Compilation will require both Matrix.cpp and Test.cpp to be compiled
 
-#include "Matrix.h" //Matrix.h has cout and endl as part of it
+#include "Matrix.h" 
 using mtx::Matrix;
 
 int main(int argc, char** argv)

@@ -12,7 +12,7 @@ Current Behaviour of Matrix:
 - Uniform 2D arrays of doubles
 - provide ability to have access to each element and edit the doubles
 - provide ability to get access to a row, but not make the pointer to that row change what it points to
-    - Might add ability to switch rows and columns (will have to be a class method)
+    - Might add ability to switch rows and columns (will have to be a public class method)
 
 Potential Ideas:
 - Resize features similar to <vectors> or <string>, meaning that have a rule for allocating extra memory from heap to allow for ease of operation when resizing
@@ -21,4 +21,6 @@ Potential Ideas:
 - Have 2 different types of each operation
     - one for Matrix to Matrix
     - other for Matrix to constant (or vice versa if I can figure out how to also overload reverse operations)
+        - constant defined as a double as this is an matrix of doubles
+        - it seems can't overload operations for fundemental data types (char, int, floats, doubles, etc.)
 
